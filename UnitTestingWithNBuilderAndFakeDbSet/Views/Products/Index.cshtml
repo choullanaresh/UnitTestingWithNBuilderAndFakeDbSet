@@ -1,0 +1,63 @@
+﻿@model UnitTestingWithNBuilderAndFakeDbSet.ViewModels.ProductIndexViewModel
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.IncludeDiscontinued, new[]
+    {
+        new SelectListItem
+        {
+            Value = "true",
+            Text = "Include discontinued products"
+        },
+        new SelectListItem
+        {
+            Value = "false",
+            Text = "Do not display discontinued products"
+        }
+    }, null, new Dictionary<string, object>()
+    {
+        { "onchange", "this.form.submit();"},
+        { "class", "form-control"}
+    })
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            &nbsp;
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                <img src="@item.ImageUrl" width="100" height="100" />
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new {id = item.Id})">
+                    @if (item.IsDiscontinued)
+                    {
+                        <del>@item.Name</del>
+                    }
+                    else
+                    {
+                        <span>@item.Name</span>
+                    }
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+    }
+
+</table>
