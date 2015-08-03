@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="FakeDbSet.cs" />
     <Compile Include="ProductsControllerTests.cs" />
+    <Compile Include="ProductsControllerTestsWithMockDbSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
